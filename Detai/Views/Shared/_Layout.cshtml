@@ -1,0 +1,112 @@
+﻿
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DC Comics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DC Comics" />
+    <meta name="keywords" content="dc comics, dc, dc universe" />
+    <meta name="author" content="DC Comics" />
+    
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="~/icon2.png">
+    
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic|Roboto:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Animate -->
+    
+    <link href="~/Content/css/animate.css" rel="stylesheet" />
+    <!-- Icomoon -->
+  
+    <link href="~/Content/css/icomoon.css" rel="stylesheet" />
+    <!-- Bootstrap  -->
+   
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+  
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+
+    <!-- Modernizr JS -->
+
+    <script src="~/Scripts/js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="fh5co-offcanvas">
+        <a href="#" class="fh5co-close-offcanvas js-fh5co-close-offcanvas"><span><i class="icon-cross3"></i> <span>Close</span></span></a>
+        <div class="fh5co-bio">
+            @{Html.RenderAction("getAbout", "Home");}
+        </div>
+        <div class="fh5co-menu">
+            <div class="fh5co-box">
+                @{Html.RenderAction("getMenu", "Menu");}
+            </div>
+            @*<div class="fh5co-box">
+                <h3 class="heading">Search</h3>
+                <form action="#">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Type a keyword">
+                    </div>
+                </form>
+            </div>*@
+        </div>
+    </div>
+    <!-- END #fh5co-offcanvas -->
+    <header id="fh5co-header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+                <ul class="fh5co-social">
+                    @{Html.RenderAction("getLogo", "Menu");}
+                </ul>
+                <div class="col-lg-12 col-md-12 text-center">
+                    <h1 id="fh5co-logo">@Html.ActionLink("DC COMICS", "Index", "Home")</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END #fh5co-header -->
+    @RenderBody()
+    <footer id="fh5co-footer">
+        <p><small>&copy; 2021 - DC COMICS. All Rights Reserved <br> Website Design: <a href="#" target="_blank">TERROR</a>  </small></p>
+        
+    </footer>
+    
+
+
+    <!-- jQuery -->
+   
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+   
+    <script src="~/Scripts/js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+  
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+  
+    <script src="~/Scripts/js/jquery.waypoints.min.js"></script>
+    <!-- Main JS -->
+    <script src="~/Scripts/js/main.js"></script>
+</body>
+</html>

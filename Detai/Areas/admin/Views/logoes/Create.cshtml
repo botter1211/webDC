@@ -1,0 +1,64 @@
+﻿@model Detai.Models.logo
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Thêm mới logo</h2>
+        </div>
+        <div class="card-body">
+            <div class="table">
+                @using (Html.BeginForm("Create", "logoes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.Label("Hình ảnh", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-12">
+                                @*/@Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control" } })*@
+                                <input type="file" name="img" id="img" accept=".jpg,.gif,.png,.jpeg,.bmp" />
+                                @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Vị trí", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.order, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.order, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Hiển thị", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    @{  bool hide = true;  }
+                                    @Html.CheckBoxFor(model => hide, new { style = "margin: -1px 5px" })
+                                    @Html.ValidationMessageFor(model => model.hide, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-12">
+                                <input type="submit" value="Lưu" class="btn btn-dark" />
+                                <a class="btn btn-danger" href="@Url.Action("Index","logoes")">Quay lại</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+             </div>
+         </div>
+     </div>
+</div>
+@section footer
+{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+} 

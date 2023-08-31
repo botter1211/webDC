@@ -1,0 +1,65 @@
+﻿@using Detai.Help
+@model Detai.Models.category
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/Layout.cshtml";
+}
+@section header{
+    <!-- Custom styles for this page -->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+}
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold text-primary">TIỂU SỬ</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <div class="bs-example" style="text-align:right; padding-bottom:10px">
+                    <div class="btn-group" style="float:left">
+                        <a class="btn btn-dark" href="@Url.Action("Create","singles")">Thêm mới</a>
+                    </div>
+                    <div class="btn-group">
+                        @Html.DropDownListFor(model => model.id, (SelectList)ViewBag.Category, "---- Tất cả tiểu sử ----", new { @class = "form-control", @id = "Category" })
+                    </div>
+                </div>
+
+                <div id="getSingle"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section footer{
+    <!-- Page level plugins -->
+    <script src="~/Content/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Scripts/js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function () {
+            function getSingle() {
+                var CategoryId = $('#Category').val();
+                $.ajax({
+                    url: '@Url.Action("getSingle","singles")',
+                    type: "GET",
+                    data: { id: CategoryId },
+                    success: function (data) {
+                        $("#getSingle").html(data);
+                    },
+                    error: function (data) {
+                        alert("something went wrong !!");
+                    }
+                });
+            }
+            getSingle();
+            $("#Category").change(function () {
+                getSingle();
+            })
+        });
+    </script>
+
+}

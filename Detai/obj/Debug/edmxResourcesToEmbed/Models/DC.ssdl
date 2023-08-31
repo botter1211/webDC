@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="about">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="img" Type="nvarchar" MaxLength="30" />
+    <Property Name="title" Type="nvarchar" MaxLength="30" />
+    <Property Name="name" Type="nvarchar" MaxLength="30" />
+    <Property Name="detail" Type="ntext" />
+    <Property Name="linkfb" Type="nvarchar(max)" />
+    <Property Name="linkig" Type="nvarchar(max)" />
+    <Property Name="linktwitter" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="link" Type="nvarchar(max)" />
+    <Property Name="meta" Type="nvarchar" MaxLength="50" />
+    <Property Name="hide" Type="bit" />
+    <Property Name="order" Type="int" />
+    <Property Name="datebegin" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="logo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="img" Type="nvarchar(max)" />
+    <Property Name="order" Type="int" />
+    <Property Name="hide" Type="bit" />
+    <Property Name="datebegin" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="menu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="link" Type="nvarchar(max)" />
+    <Property Name="meta" Type="nvarchar" MaxLength="50" />
+    <Property Name="hide" Type="bit" />
+    <Property Name="order" Type="int" />
+    <Property Name="datebegin" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="single">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="30" />
+    <Property Name="img" Type="nvarchar" MaxLength="30" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="detail" Type="nvarchar(max)" />
+    <Property Name="meta" Type="nvarchar(max)" />
+    <Property Name="hide" Type="bit" />
+    <Property Name="order" Type="int" />
+    <Property Name="datebegin" Type="smalldatetime" />
+    <Property Name="categoryid" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_single_category">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="single" Type="Self.single" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="single">
+        <PropertyRef Name="categoryid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DCModelStoreContainer">
+    <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="logo" EntityType="Self.logo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="single" EntityType="Self.single" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_single_category" Association="Self.FK_single_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="single" EntitySet="single" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

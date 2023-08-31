@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Detai.Models.about>
+
+@foreach (var i in Model)
+{
+    <figure>
+        <img src="~/Content/images/@i.img" alt="NTH" class="img-responsive">
+    </figure>
+    <h3 class="heading">@i.title</h3>
+    <h2>@i.name</h2>
+    <p>@i.detail </p>
+    <ul class="fh5co-social">
+        <li><a href="@i.linktwitter"><i class="icon-twitter"></i></a></li>
+        <li><a href="@i.linkfb"><i class="icon-facebook"></i></a></li>
+        <li><a href="@i.linkig"><i class="icon-instagram"></i></a></li>
+    </ul>
+
+}

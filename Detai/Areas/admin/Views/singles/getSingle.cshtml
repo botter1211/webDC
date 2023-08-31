@@ -1,0 +1,89 @@
+﻿@using Detai.Help
+@model IEnumerable<Detai.Models.single>
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Tên tiểu sử
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th>
+                Vị trí
+            </th>
+            <th>
+                Ngày cập nhật
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var number = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(number++)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td align="center">
+                    <img src="~/Content/images/@item.img" width="70px" />
+                </td>
+                <td>
+                    @(item.hide.GetValueOrDefault(false) ? "Hiển thị" : "Ẩn")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.order)
+                </td>
+                <td>
+                    @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                </td>
+               
+                <td align="center">
+                    <a class="btn btn-dark" href="@Url.Action("Edit", "singles", new { id = item.id })">Sửa</a> |
+                    <a data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-dark" href="@Url.Action("Details", "singles", new { id = item.id })">Chi tiết</a> |
+                    <a data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-danger" href="@Url.Action("Delete", "singles", new { id = item.id })">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/js/demo/datatables-demo.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTable-example').DataTable({
+            reponsive: true
+        });
+    });
+</script>
+<script>
+    $("#myModal").on("show.bs.modal", function (e) {
+        var link = $(e.relatedTarget);
+        $(this).find(".modal-body").load(link.attr("href"));
+    });
+</script>
+
+
+

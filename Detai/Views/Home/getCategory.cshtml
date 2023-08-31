@@ -1,0 +1,9 @@
+﻿@model List<Detai.Models.category>
+
+@foreach (var i in Model)
+{
+    
+    <div class="dc">
+        @Html.Action("getSingle", "Home", new { id = @i.id })
+    </div>
+}

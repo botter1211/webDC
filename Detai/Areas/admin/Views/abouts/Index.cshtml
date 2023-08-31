@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Detai.Models.about>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/Layout.cshtml";
+}
+
+@section header{
+    <!-- Custom styles for this page -->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold text-primary">GIỚI THIỆU</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                @*<a class="btn btn-dark" href="@Url.Action("Create","abouts")">Thêm mới</a>
+                <br /><br />*@
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Hình ảnh
+                            </th>
+                            <th>
+                                Tên
+                            </th>
+                            
+                            <th>
+                                Link FB
+                            </th>
+                            <th>
+                                Link Instagram
+                            </th>
+                            <th>
+                                Link Twitter
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{var number = 1;}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td align="center"> 
+                                    <img src="~/Content/images/@item.img" width="70px"/>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.linkfb)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.linkig)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.linktwitter)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "abouts", new { id = item.id })" class="btn btn-dark">
+                                        Sửa
+                                    </a> |
+                                    <a href="@Url.Action("Details", "abouts", new { id = item.id })" data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-dark">
+                                        Chi tiết
+                                    </a> @*|
+                                    <a href="@Url.Action("Delete", "abouts", new { id = item.id })" data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-danger">
+                                        Xóa
+                                    </a>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section footer{
+    <!-- Page level plugins -->
+    <script src="~/Content/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Scripts/js/demo/datatables-demo.js"></script>
+    <script>
+        $("#myModal").on("show.bs.modal", function (e) {
+            var link = $(e.relatedTarget);
+            $(this).find(".modal-body").load(link.attr("href"));
+        });
+    </script>
+}

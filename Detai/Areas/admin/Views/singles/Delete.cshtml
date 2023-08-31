@@ -1,0 +1,102 @@
+﻿@model Detai.Models.single
+
+@{
+    ViewBag.Title = "Delete";
+    
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-danger">Bạn chắc chắn muốn xóa tiểu sử này ??</h2>
+        </div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    Tên tiểu sử
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.name)
+                </dd>
+
+                <dt>
+                    Hình đại diện
+                </dt>
+
+                <dd>
+                    <img src="~/Content/images/@Model.img" width="70px" />
+                </dd>
+
+                <dt>
+                    Mô tả
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.description)
+                </dd>
+
+                <dt>
+                    Chi tiết
+                </dt>
+
+                <dd>
+                    @Html.Raw(HttpUtility.HtmlDecode(@Model.detail))
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.meta)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.meta)
+                </dd>
+
+                <dt>
+                    Hiển thị
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.hide)
+                </dd>
+
+                <dt>
+                    Vị trí
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.order)
+                </dd>
+
+                <dt>
+                    Ngày cập nhật
+                </dt>
+
+                <dd>
+                    @(Model.datebegin.HasValue ? Model.datebegin.Value.ToString("dd/MM/yyyy") : "")
+                </dd>
+
+                <dt>
+                    Danh mục
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.category.name)
+                </dd>
+
+            </dl>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="form-actions no-color">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Xóa" class="btn btn-dark" />
+                        <a class="btn btn-danger" href="@Url.Action("Index","singles")">Quay lại</a>
+                    </div>
+                 </div>
+            </div>
+        }
+    </div>
+</div>

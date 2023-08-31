@@ -1,0 +1,50 @@
+﻿@model List<Detai.Models.single>
+
+@foreach (var item in Model)
+{
+
+    
+    
+        <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+            <ul class="align">
+                <li>
+                    <figure class='book'>
+                        <!-- Front -->
+                        <ul class='hardcover_front'>
+                            <li>
+                                <img src="~/Content/images/@item.img" alt="Image" class="img-responsive">
+                            </li>
+                            <li></li>
+                        </ul>
+                        <!-- Pages -->
+                        <ul class='page'>
+                            <li></li>
+                            <li>
+                                <a class="btn" href="/@ViewBag.meta/@item.meta/@item.id">Read more</a>
+                            </li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <!-- Back -->
+                        <ul class='hardcover_back'>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <ul class='book_spine'>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <figcaption>
+                            <a href="/@ViewBag.meta/@item.meta/@item.id"><h3>@item.name</h3></a>
+
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+        </article>
+    
+    
+    
+   <!-- /container -->
+}

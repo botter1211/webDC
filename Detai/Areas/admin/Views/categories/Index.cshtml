@@ -1,0 +1,123 @@
+﻿@using Detai.Help
+@model IEnumerable<Detai.Models.category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/Layout.cshtml";
+}
+
+@section header{
+    <!-- Custom styles for this page -->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold text-primary">DANH MỤC</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <a href="@Url.Action("Create","categories")" data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-dark">
+                    Thêm mới
+                </a>
+                <br /><br />
+                
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                STT
+                            </th>
+                            <th>
+                                Tên danh mục
+                            </th>
+                            <th>
+                                Đường dẫn
+                            </th>
+                           
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th>
+                                Vị trí
+                            </th>
+                            <th>
+                                Ngày cập nhật
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{var number = 1;}
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.Raw(number ++)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.link)
+                                </td>
+                                
+                                <td>
+                                    @(item.hide.GetValueOrDefault(false) ? "Hiển thị" : "Ẩn")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.order)
+                                </td>
+                                <td>
+                                    @(item.datebegin.HasValue ? item.datebegin.Value.ToString("dd/MM/yyyy"): "")
+                                </td>
+                                <td align="center">
+                                    
+                                    <a href="@Url.Action("Edit","categories", new { id = item.id })" data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-dark">
+                                        Sửa 
+                                    </a>
+                                    |
+                                    <a href="@Url.Action("Details", "categories", new { id = item.id })" data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-dark">
+                                        Chi tiết
+                                    </a>
+                                    |
+                                    <a href="@Url.Action("Delete", "categories", new { id = item.id })" data-toggle="modal" data-target="#myModal" data-remote="false" class="btn btn-danger">
+                                        Xóa
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Default bootstrap modal example -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    @section footer{
+        <!-- Page level plugins -->
+        <script src="~/Content/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="~/Scripts/js/demo/datatables-demo.js"></script>
+        <script>
+            $("#myModal").on("show.bs.modal", function (e) {
+                var link = $(e.relatedTarget);
+                $(this).find(".modal-body").load(link.attr("href"));
+            });
+        </script>
+        
+    }

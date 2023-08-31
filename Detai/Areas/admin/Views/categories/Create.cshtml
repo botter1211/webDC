@@ -1,0 +1,116 @@
+﻿@model Detai.Models.category
+
+@{
+    ViewBag.Title = "Create";
+
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Thêm mới danh mục</h2>
+        </div>
+        <div class="card-body">
+            <div class="table">
+                @using (Html.BeginForm("Create", "categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.Label("Tên danh mục", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.meta, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.meta, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.meta, "", new { @class = "text-danger" })
+                            </div>
+                            <script>
+                                $(function () {
+                                    $("#name").keyup(function () {
+                                        var text = $.trim($(this).val().toLowerCase());
+                                        var text_create;
+                                        text_create = text.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+                                            .replace(/\ /g, '-')
+                                            .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+                                            .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+                                            .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+                                            .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+                                            .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+                                            .replace(/đ/g, "d")
+                                            .replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A")
+                                            .replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E")
+                                            .replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I")
+                                            .replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O")
+                                            .replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U")
+                                            .replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y")
+                                            .replace(/Đ/g, "D")
+                                        $('#meta').val(text_create);
+                                    }).keyup();
+                                });
+                            </script>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Đường dẫn", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.link, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.link, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.Label("Vị trí", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.order, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.order, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    @Html.Label("Hiển thị", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            @{  bool hide = true;  }
+                                            @Html.CheckBoxFor(model => hide, new { style = "margin: -1px 5px" })
+                                            @Html.ValidationMessageFor(model => model.hide, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-10">
+                                <input type="submit" value="Lưu" class="btn btn-dark" />
+                                <a class="btn btn-danger" href="@Url.Action("Index","categories")">Quay lại</a>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section footer
+{
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+
+}

@@ -1,0 +1,53 @@
+﻿@model Detai.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/admin/Views/Shared/LoginLayout.cshtml";
+}
+
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-5 d-none d-lg-block bg-login-image"></div>
+            <div class="col-lg-7">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="text-gray-900 mb-4">Đăng nhập</h1>
+                        <hr />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+
+                    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+                    {
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control form-control-user" })
+
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-user" })
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-dark btn-user btn-block" value="Đăng nhập" />
+                        </div>
+
+                    }
+
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row fh5co-post-entry">
+        @{Html.RenderAction("getCategory", "Home");}
+
+        <div class="clearfix visible-xs-block"></div>
+    </div>
+</div>
+

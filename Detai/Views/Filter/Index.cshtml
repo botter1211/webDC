@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row fh5co-post-entry">
+        <div class="title" style="text-align:center;">
+            <h2>@Model.name</h2>
+        </div>
+        <div class="fh5co-article-title" style="text-align:center;">
+            @Html.Action("getSingle", "Home", new { id = Model.id })
+        </div>
+        <div class="clearfix visible-xs-block"></div>
+    </div>
+</div>
+
